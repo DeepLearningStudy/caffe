@@ -11,33 +11,35 @@ using namespace std;
 typedef double Dtype;
 
 int main(int argc, char** argv) {
-    Blob<Dtype>* blob_bottom = new Blob<Dtype>(10, 20, 1, 1);
-    Blob<Dtype>* blob_top = new Blob<Dtype>();
-    vector<Blob<Dtype>*> blob_bottom_vec;
-    vector<Blob<Dtype>*> blob_top_vec;
-
     Caffe::set_mode(Caffe::CPU);
     Caffe::set_random_seed(1701);
 
-    // fill the values
+    // bottom/top blobs
+    Blob<Dtype>* blob_top = new Blob<Dtype>();
+    Blob<Dtype>* blob_bottom = new Blob<Dtype>(10, 20, 1, 1);
     FillerParameter filler_param;
     GaussianFiller<Dtype> filler(filler_param);
     filler.Fill(blob_bottom);
 
+    // blob vector
+    vector<Blob<Dtype>*> blob_bottom_vec;
+    vector<Blob<Dtype>*> blob_top_vec;
     blob_bottom_vec.push_back(blob_bottom);
     blob_top_vec.push_back(blob_top);
 
-    // TestSetupMaxVal
+    // argmax layer
     LayerParameter layer_param;
     ArgMaxParameter* argmax_param = layer_param.mutable_argmax_param();
     argmax_param->set_out_max_val(true);    // two channel: 0 arg, 1 max_val
     ArgMaxLayer<Dtype> layer(layer_param);
     layer.SetUp(blob_bottom_vec, blob_top_vec);
-    layer.Forward(blob_bottom_vec, blob_top_vec);
 
     cout<<"blob_top_num:"<<blob_top->num()<<endl;
     cout<<"blob_bottom_num:"<<blob_bottom->num()<<endl;
     cout<<"blob_top_channels:"<<blob_top->channels()<<endl;
+
+    //forward
+    layer.Forward(blob_bottom_vec, blob_top_vec);
 
     // Now, check values
     const Dtype* bottom_data = blob_bottom->cpu_data();

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="ex_logreg" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\caffe\;CMake Files\..\..\..\..\..\caffe\caffe\;CMake Files\..\..\..\..\..\caffe\caffe\build\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\usr\share\;CMake Files\..\..\..\..\..\..\..\usr\share\OpenCV\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="ex_logreg_mnist">
+         <Option output="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/ex_logreg_mnist" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DUSE_OPENCV" />
+            <Add option="-DUSE_LMDB" />
+            <Add option="-DUSE_LEVELDB" />
+            <Add directory="/home/koosy/caffe/caffe/build/include" />
+            <Add directory="/home/koosy/caffe/caffe/include" />
+            <Add directory="/home/koosy/caffe/caffe/src" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/atlas" />
+            <Add directory="/usr/include/c++/4.9" />
+            <Add directory="/usr/include/c++/4.9/backward" />
+            <Add directory="/usr/include/opencv" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.9" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed" />
+            <Add directory="/usr/local/cuda/include" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 ex_logreg_mnist" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="ex_logreg_mnist/fast">
+         <Option output="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/ex_logreg_mnist" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DUSE_OPENCV" />
+            <Add option="-DUSE_LMDB" />
+            <Add option="-DUSE_LEVELDB" />
+            <Add directory="/home/koosy/caffe/caffe/build/include" />
+            <Add directory="/home/koosy/caffe/caffe/include" />
+            <Add directory="/home/koosy/caffe/caffe/src" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/atlas" />
+            <Add directory="/usr/include/c++/4.9" />
+            <Add directory="/usr/include/c++/4.9/backward" />
+            <Add directory="/usr/include/opencv" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.9" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed" />
+            <Add directory="/usr/local/cuda/include" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 ex_logreg_mnist/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/ex_logreg_mnist.cpp">
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/mnist.cpp">
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/mnist.h">
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/../../../../../caffe/caffe/build/CaffeConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\caffe\caffe\build\" />
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/../../../../../caffe/caffe/build/CaffeTargets.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\caffe\caffe\build\" />
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/../../../../../../../usr/share/OpenCV/OpenCVModules.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist/../../../../../../../usr/share/OpenCV/OpenCVModules-release.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\share\OpenCV\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

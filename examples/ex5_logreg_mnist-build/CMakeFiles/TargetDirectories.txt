@@ -1,0 +1,1 @@
+/home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/CMakeFiles/ex_logreg_mnist.dir

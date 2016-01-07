@@ -53,42 +53,7 @@ CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 CMAKE_SOURCE_DIR = /home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build
-
-#=============================================================================
-# Target rules for target CMakeFiles/ex_logreg_binary.dir
-
-# All Build rule for target.
-CMakeFiles/ex_logreg_binary.dir/all:
-	$(MAKE) -f CMakeFiles/ex_logreg_binary.dir/build.make CMakeFiles/ex_logreg_binary.dir/depend
-	$(MAKE) -f CMakeFiles/ex_logreg_binary.dir/build.make CMakeFiles/ex_logreg_binary.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build/CMakeFiles 
-	@echo "Built target ex_logreg_binary"
-.PHONY : CMakeFiles/ex_logreg_binary.dir/all
-
-# Include target in all.
-all: CMakeFiles/ex_logreg_binary.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/ex_logreg_binary.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ex_logreg_binary.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build/CMakeFiles 0
-.PHONY : CMakeFiles/ex_logreg_binary.dir/rule
-
-# Convenience name for target.
-ex_logreg_binary: CMakeFiles/ex_logreg_binary.dir/rule
-.PHONY : ex_logreg_binary
-
-# clean rule for target.
-CMakeFiles/ex_logreg_binary.dir/clean:
-	$(MAKE) -f CMakeFiles/ex_logreg_binary.dir/build.make CMakeFiles/ex_logreg_binary.dir/clean
-.PHONY : CMakeFiles/ex_logreg_binary.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/ex_logreg_binary.dir/clean
-.PHONY : clean
+CMAKE_BINARY_DIR = /home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build
 
 #=============================================================================
 # Target rules for target CMakeFiles/ex_logreg_mnist.dir
@@ -97,7 +62,7 @@ clean: CMakeFiles/ex_logreg_binary.dir/clean
 CMakeFiles/ex_logreg_mnist.dir/all:
 	$(MAKE) -f CMakeFiles/ex_logreg_mnist.dir/build.make CMakeFiles/ex_logreg_mnist.dir/depend
 	$(MAKE) -f CMakeFiles/ex_logreg_mnist.dir/build.make CMakeFiles/ex_logreg_mnist.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/CMakeFiles  1 2
 	@echo "Built target ex_logreg_mnist"
 .PHONY : CMakeFiles/ex_logreg_mnist.dir/all
 
@@ -107,9 +72,9 @@ all: CMakeFiles/ex_logreg_mnist.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ex_logreg_mnist.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ex_logreg_mnist.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/koosy/git/deeplearningstudy/caffe/examples/ex4_logreg_mnist-build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/koosy/git/deeplearningstudy/caffe/examples/ex5_logreg_mnist-build/CMakeFiles 0
 .PHONY : CMakeFiles/ex_logreg_mnist.dir/rule
 
 # Convenience name for target.

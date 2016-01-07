@@ -70,6 +70,5 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/ex_logreg_binary.dir/DependInfo.cmake"
   "CMakeFiles/ex_logreg_mnist.dir/DependInfo.cmake"
   )
