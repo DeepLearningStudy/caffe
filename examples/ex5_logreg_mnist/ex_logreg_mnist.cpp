@@ -6,12 +6,10 @@
 #include "caffe/caffe.hpp"
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
-#include "caffe/filler.hpp"
-#include "mnist.h"
 
+typedef double Dtype;
 using namespace caffe;
 using namespace std;
-using namespace cv;
 
 int nIter = 10000;
 int clas = 10; //The number of classes in MNIST dataset
