@@ -6,5 +6,5 @@ find_package(Caffe)
 include_directories(${Caffe_INCLUDE_DIRS})
 add_definitions(${Caffe_DEFINITIONS})
 
-add_executable(ex_lenet_mnist ex_lenet_mnist.cpp mnist.cpp)
+add_executable(ex_lenet_mnist ex_lenet_mnist.cpp)
 target_link_libraries(ex_lenet_mnist ${Caffe_LIBRARIES})

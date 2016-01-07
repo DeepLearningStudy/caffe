@@ -13,35 +13,41 @@ using namespace caffe;
 using namespace std;
 using namespace cv;
 
-int nIter = 100;
+int nIter = 10000;
 int clas = 10; //The number of classes in MNIST dataset
 
 
 int main()
 {
-    MNIST data("/home/koosy/caffe/caffe/data/mnist/");
+    Caffe::set_mode(Caffe::GPU);
 
-//    for (int n=0;n<data.num_test_images;n++){
-//        cout<<data.blob_test_labels->mutable_cpu_data()[data.blob_test_labels->offset(n,0,0.0)]<<": " << endl;
-//        for(int r=0;r<data.rows;r++){
-//            for(int c=0; c<data.cols;c++){
-//                //raw data
-//                int px = data.blob_test_images->mutable_cpu_data()[data.blob_test_images->offset(n,0,r,c)];
-//                cout << setfill(' ') << setw(4) << px;
+    // data layer
+    vector<Blob<Dtype>*> blob_bottom_data_vec_;
+    vector<Blob<Dtype>*> blob_top_data_vec_;
+    Blob<Dtype>* const blob_data = new Blob<Dtype>();
+    Blob<Dtype>* const blob_label = new Blob<Dtype>();
 
-//            }
-//            cout << endl;
-//        }
-//        cout<<endl;
-//    }
+    blob_top_data_vec_.push_back(blob_data);
+    blob_top_data_vec_.push_back(blob_label);
 
+    LayerParameter layer_data_param;
+    DataParameter* data_param = layer_data_param.mutable_data_param();
+    data_param->set_batch_size(64);
+    data_param->set_source("/home/koosy/caffe/caffe/examples/mnist/mnist_train_lmdb");
+    data_param->set_backend(caffe::DataParameter_DB_LMDB);
+
+    TransformationParameter* transform_param = layer_data_param.mutable_transform_param();
+    transform_param->set_scale(1./255.);
+
+    DataLayer<Dtype> layer_data(layer_data_param);
+    layer_data.SetUp(blob_bottom_data_vec_, blob_top_data_vec_);
 
     //set inner product layer
     vector<Blob<Dtype>*> blob_bottom_ip_vec_;
     vector<Blob<Dtype>*> blob_top_ip_vec_;
     Blob<Dtype>* const blob_top_ip_ = new Blob<Dtype>();
 
-    blob_bottom_ip_vec_.push_back(data.blob_train_images);
+    blob_bottom_ip_vec_.push_back(blob_data);
     blob_top_ip_vec_.push_back(blob_top_ip_);
 
     LayerParameter layer_ip_param;
@@ -58,7 +64,7 @@ int main()
     Blob<Dtype>* const blob_top_loss_ = new Blob<Dtype>();
 
     blob_bottom_loss_vec_.push_back(blob_top_ip_);
-    blob_bottom_loss_vec_.push_back(data.blob_train_labels);
+    blob_bottom_loss_vec_.push_back(blob_label);
     blob_top_loss_vec_.push_back(blob_top_loss_);
 
     LayerParameter layer_loss_param;
@@ -69,6 +75,7 @@ int main()
     // forward and backward iteration
     for(int n=0;n<nIter;n++){
         // forward
+        layer_data.Forward(blob_bottom_data_vec_, blob_top_data_vec_);
         layer_ip.Forward(blob_bottom_ip_vec_, blob_top_ip_vec_);
         Dtype loss = layer_loss.Forward(blob_bottom_loss_vec_, blob_top_loss_vec_);
         cout<<"Iter "<<n<<" loss "<<loss<<endl;
@@ -85,56 +92,81 @@ int main()
         vector<shared_ptr<Blob<Dtype> > > param = layer_ip.blobs();
         caffe_scal(param[0]->count(), rate, param[0]->mutable_cpu_diff());
         param[0]->Update();
-
-        // show weight params and derv of the ip layer
-//        for(int i=0;i<param[0]->count();i++){
-         //  cout<<i<<": "<<param[0]->cpu_data()[i]<<", diff: "<<param[0]->mutable_cpu_diff()[i]<<endl;
-        //}
-        //cout<<endl;
     }
 
 
     //prediction
+    // data layer
+    vector<Blob<Dtype>*> blob_bottom_testdata_vec_;
+    vector<Blob<Dtype>*> blob_top_testdata_vec_;
+    Blob<Dtype>* const blob_testdata = new Blob<Dtype>();
+    Blob<Dtype>* const blob_testlabel = new Blob<Dtype>();
+
+    blob_top_testdata_vec_.push_back(blob_testdata);
+    blob_top_testdata_vec_.push_back(blob_testlabel);
+
+    LayerParameter layer_testdata_param;
+    DataParameter* testdata_param = layer_testdata_param.mutable_data_param();
+    testdata_param->set_batch_size(10000);
+    testdata_param->set_source("/home/koosy/caffe/caffe/examples/mnist/mnist_test_lmdb");
+    testdata_param->set_backend(caffe::DataParameter_DB_LMDB);
+
+    TransformationParameter* transform_test_param = layer_testdata_param.mutable_transform_param();
+    transform_test_param->set_scale(1./255.);
+
+    DataLayer<Dtype> layer_testdata(layer_testdata_param);
+    layer_testdata.SetUp(blob_bottom_testdata_vec_, blob_top_testdata_vec_);
+
     vector<Blob<Dtype>*> blob_bottom_ip_test_vec_;
-    vector<Blob<Dtype>*> blob_top_ip_test_vec_;
-    Blob<Dtype>* const blob_top_ip_test_ = new Blob<Dtype>();
+    blob_bottom_ip_test_vec_.push_back(blob_testdata);
 
-    blob_bottom_ip_test_vec_.push_back(data.blob_test_images);
-    blob_top_ip_test_vec_.push_back(blob_top_ip_test_);
+    layer_ip.Reshape(blob_bottom_ip_test_vec_, blob_top_ip_vec_);
 
-    layer_ip.Reshape(blob_bottom_ip_test_vec_, blob_top_ip_test_vec_);
-    layer_ip.Forward(blob_bottom_ip_test_vec_, blob_top_ip_test_vec_);
+    vector<Blob<Dtype>*> blob_bottom_loss_test_vec_;
+    blob_bottom_loss_test_vec_.push_back(blob_top_ip_);
+    blob_bottom_loss_test_vec_.push_back(blob_testlabel);
+
+    layer_loss.Reshape(blob_bottom_loss_test_vec_, blob_top_loss_vec_);
+
+    // armax layer
+    vector<Blob<Dtype>*> blob_bottom_argmax_vec;
+    vector<Blob<Dtype>*> blob_top_argmax_vec;
+    Blob<Dtype>* blob_top_argmax = new Blob<Dtype>();
+    blob_bottom_argmax_vec.push_back(blob_top_ip_);
+    blob_top_argmax_vec.push_back(blob_top_argmax);
+
+    LayerParameter layer_argmax_param;
+    ArgMaxParameter* argmax_param = layer_argmax_param.mutable_argmax_param();
+    argmax_param->set_out_max_val(false);
+    ArgMaxLayer<Dtype> layer_argmax(layer_argmax_param);
+    layer_argmax.SetUp(blob_bottom_argmax_vec, blob_top_argmax_vec);
 
     //evaluation
-    //score
-    int correct =0;
-    for (int n = 0; n<data.num_test_images;n++){  // 10 <<-- num_test
-        int truelabel = data.blob_test_labels->mutable_cpu_data()[data.blob_test_labels->offset(n,0,0,0)];
+    int correct = 0;
+    int cnt = 0;
+    // forward
+    layer_testdata.Forward(blob_bottom_testdata_vec_, blob_top_testdata_vec_);
+    layer_ip.Forward(blob_bottom_ip_test_vec_, blob_top_ip_vec_);
+    layer_argmax.Forward(blob_bottom_argmax_vec, blob_top_argmax_vec);
 
-        double* score = new double[10];
-        for(int i = 0 ; i<10;i++){
-            score[i]=blob_top_ip_test_-> mutable_cpu_data()[blob_top_ip_test_->offset(n,i,0,0)];
-        }
+    Dtype loss = layer_loss.Forward(blob_bottom_loss_test_vec_, blob_top_loss_vec_);
+    cout<<" loss "<<loss<<endl;
 
-        int predictedlabel =0;
+    for (int n = 0; n<blob_testlabel->count();n++){  // 10 <<-- num_test
+        cnt ++;
+        Dtype* label_data = blob_testlabel->mutable_cpu_data();
+        int truelabel = label_data[n];
 
-        for(int i = 1;i<10;i++){
-            if(score[i]>score[predictedlabel]){
-                predictedlabel = i;
-            }
-        }
+        Dtype* prediction_data = blob_top_argmax-> mutable_cpu_data();
+        int predictedlabel = prediction_data[n];
 
         if(truelabel == predictedlabel){
             correct++;
         }
 
-
-        cout << "True label: " << truelabel << "      Predicted label:" << predictedlabel << "   Accuracy: " << correct <<"/" << (n+1) <<endl;
-        cout << score[0] << " " << score[1] << " " << score[2] << " " << score[3] << " " << score[4] << " ";
-        cout << score[5] << " " << score[6] << " " << score[7] << " " << score[8] << " " << score[9] << endl;
-
-
+        cout << "True label: " << truelabel << "      Predicted label:" << predictedlabel << "   Accuracy: " << correct <<"/" << cnt <<endl;
     }
+
     return 0;
 }
 
