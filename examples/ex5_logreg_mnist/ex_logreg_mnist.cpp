@@ -6,8 +6,6 @@
 #include "caffe/caffe.hpp"
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
-#include "caffe/filler.hpp"
-#include "mnist.h"
 
 using namespace caffe;
 using namespace std;
