@@ -49,7 +49,7 @@ int main()
     blob_top_ip_vec.push_back(blob_top_ip);
 
     LayerParameter layer_ip_param;
-    layer_ip_param.mutable_inner_product_param()->set_num_output(10);
+    layer_ip_param.mutable_inner_product_param()->set_num_output(clas);
     layer_ip_param.mutable_inner_product_param()->mutable_weight_filler()->set_type("xavier");
     layer_ip_param.mutable_inner_product_param()->mutable_bias_filler()->set_type("constant");
 
@@ -150,7 +150,7 @@ int main()
     Dtype loss = layer_loss.Forward(blob_bottom_loss_test_vec, blob_top_loss_vec);
     cout<<" loss "<<loss<<endl;
 
-    for (int n = 0; n<blob_testlabel->count();n++){  // 10 <<-- num_test
+    for (int n = 0; n<blob_testlabel->count();n++){
         cnt ++;
         Dtype* label_data = blob_testlabel->mutable_cpu_data();
         int truelabel = label_data[n];
