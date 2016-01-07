@@ -12,7 +12,7 @@ using namespace caffe;
 using namespace std;
 
 int nIter = 10000;
-int clas = 10; //The number of classes in MNIST dataset
+int nClass = 10; //The number of classes in MNIST dataset
 
 
 int main()
@@ -49,7 +49,7 @@ int main()
     blob_top_ip_vec.push_back(blob_top_ip);
 
     LayerParameter layer_ip_param;
-    layer_ip_param.mutable_inner_product_param()->set_num_output(clas);
+    layer_ip_param.mutable_inner_product_param()->set_num_output(nClass);
     layer_ip_param.mutable_inner_product_param()->mutable_weight_filler()->set_type("xavier");
     layer_ip_param.mutable_inner_product_param()->mutable_bias_filler()->set_type("constant");
 
