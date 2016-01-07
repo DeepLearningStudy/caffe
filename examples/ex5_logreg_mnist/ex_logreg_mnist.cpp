@@ -11,7 +11,7 @@ typedef double Dtype;
 using namespace caffe;
 using namespace std;
 
-int nIter = 10000;
+int nIter = 30000;
 int nClass = 10; //The number of classes in MNIST dataset
 
 
@@ -67,7 +67,7 @@ int main()
 
     LayerParameter layer_loss_param;
     SoftmaxWithLossLayer<Dtype> layer_loss(layer_loss_param);
-    layer_loss.SetUp(blob_bottom_loss_vec, blob_top_loss_vec);\
+    layer_loss.SetUp(blob_bottom_loss_vec, blob_top_loss_vec);
 
 
     // forward and backward iteration
@@ -148,7 +148,8 @@ int main()
     layer_argmax.Forward(blob_bottom_argmax_vec, blob_top_argmax_vec);
 
     Dtype loss = layer_loss.Forward(blob_bottom_loss_test_vec, blob_top_loss_vec);
-    cout<<" loss "<<loss<<endl;
+    cout<<"nIter: "<<nIter<<endl;
+    cout<<"loss: "<<loss<<endl;
 
     for (int n = 0; n<blob_testlabel->count();n++){
         cnt ++;
@@ -161,9 +162,8 @@ int main()
         if(truelabel == predictedlabel){
             correct++;
         }
-
-        cout << "True label: " << truelabel << "      Predicted label:" << predictedlabel << "   Accuracy: " << correct <<"/" << cnt <<endl;
     }
+    cout << "Accuracy: " << correct <<"/" << cnt <<endl;
 
     return 0;
 }
