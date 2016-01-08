@@ -4,6 +4,7 @@
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
 #include "caffe/filler.hpp"
+#include "caffe/layers/argmax_layer.hpp"
 
 using namespace caffe;
 using namespace std;
